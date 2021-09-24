@@ -24,6 +24,7 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/quay/clair/v2"
@@ -497,6 +498,6 @@ func deleteNotification(w http.ResponseWriter, r *http.Request, p httprouter.Par
 }
 
 func getMetrics(w http.ResponseWriter, r *http.Request, p httprouter.Params, ctx *context) (string, int) {
-	prometheus.Handler().ServeHTTP(w, r)
+	promhttp.Handler().ServeHTTP(w, r)
 	return getMetricsRoute, 0
 }
